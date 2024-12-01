@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">HyperDesignTask</string>
+    <string name="app_name">Hyper Design Task</string>
+    <string name="login">Login</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="repeat_your_password">Repeat your password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="password">Password</string>
+    <string name="enter_your_email_address">Enter your email address</string>
+    <string name="email_address">Email Address</string>
+    <string name="register_with_valid_email">Register With Valid Email</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="phone_number">phone number</string>
+    <string name="country">Country</string>
+    <string name="upload_photo">Upload Photo</string>
+    <string name="upload">Upload</string>
 </resources>

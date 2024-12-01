@@ -41,6 +41,7 @@ kapt {
 }
 
 dependencies {
+    implementation("com.airbnb.android:lottie:6.0.1")
     implementation("com.google.dagger:hilt-android:2.51.1")
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
     implementation(libs.androidx.core.ktx)
