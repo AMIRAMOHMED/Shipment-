@@ -44,6 +44,43 @@ tools:context=".register.ui.RegisterScreen">
             android:layout_marginTop="10dp"
             android:orientation="vertical">
 
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/name"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/primary_dark"
+                app:boxStrokeWidth="1dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enter_your_name"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="16sp" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
@@ -68,7 +105,7 @@ tools:context=".register.ui.RegisterScreen">
                 app:boxStrokeWidth="1dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextTextEmailAddress"
+                    android:id="@+id/email"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_your_email_address"
@@ -158,11 +195,11 @@ tools:context=".register.ui.RegisterScreen">
                 app:boxStrokeWidth="1dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextTextEnterPhone"
+                    android:id="@+id/phone"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_your_phone_number"
-                    android:inputType="textPassword"
+                    android:inputType="phone"
                     android:textColor="@color/text_secondary"
                     android:textSize="16sp" />
 
@@ -192,7 +229,7 @@ tools:context=".register.ui.RegisterScreen">
                 app:boxStrokeWidth="1dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextTextPassword"
+                    android:id="@+id/password"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_your_password"
@@ -226,7 +263,7 @@ tools:context=".register.ui.RegisterScreen">
                 app:boxStrokeWidth="1dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextTextConfirmPassword"
+                    android:id="@+id/repeatedPassword"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/repeat_your_password"
@@ -237,7 +274,7 @@ tools:context=".register.ui.RegisterScreen">
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/materialButton"
+                android:id="@+id/singUp"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="250dp"
                 android:layout_marginTop="10dp"

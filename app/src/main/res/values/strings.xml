@@ -15,4 +15,6 @@
     <string name="country">Country</string>
     <string name="upload_photo">Upload Photo</string>
     <string name="upload">Upload</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="name">Name</string>
 </resources>
