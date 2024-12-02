@@ -320,18 +320,21 @@ tools:context=".register.ui.RegisterScreen">
 
             </LinearLayout>
 
+
+
         </LinearLayout>
+
     </LinearLayout>
 
+
 </ScrollView>
-<com.airbnb.lottie.LottieAnimationView
-    android:id="@+id/lottieAnimationView"
-    android:layout_width="200dp"
-    android:layout_height="200dp"
-    android:layout_gravity="center"
-    android:visibility="gone"
-    app:lottie_autoPlay="false"
-    app:lottie_loop="true" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:indeterminateTint="@color/primary_dark" />
 
 
 </FrameLayout>

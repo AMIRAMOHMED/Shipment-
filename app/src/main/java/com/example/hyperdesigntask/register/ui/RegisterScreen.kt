@@ -2,6 +2,7 @@ package com.example.hyperdesigntask.register.ui
 import android.net.Uri
 import android.os.Bundle
 import android.util.Patterns
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -9,10 +10,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.hyperdesigntask.data.model.RegisterRequest
 import com.example.hyperdesigntask.databinding.ActivityMainBinding
 import com.example.hyperdesigntask.register.viewmodel.RegisterViewModel
+import com.example.hyperdesigntask.utils.Resource
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -76,6 +80,32 @@ class RegisterScreen : AppCompatActivity() {
                 // Trigger registration
                 registerViewModel.registerUser(request)
                 Toast.makeText(this, "Registration triggered!", Toast.LENGTH_SHORT).show()
+                observeRegisterState()
+
+            }
+        }
+    }
+    private fun observeRegisterState() {
+        lifecycleScope.launchWhenStarted {
+            registerViewModel.registerState.collect { state ->
+                when (state) {
+                    is Resource.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
+                    }
+                    is Resource.Success -> {
+                        binding.progressBar.visibility = View.GONE
+                        val user = state.data.user
+                        Snackbar.make(
+                            binding.root,
+                            "Registration successful for ${user?.name ?: "unknown"}",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                    is Resource.Error -> {
+                        binding.progressBar.visibility = View.GONE
+                        Snackbar.make(binding.root, state.message ?: "Unknown error", Snackbar.LENGTH_LONG).show()
+                    }
+                }
             }
         }
     }
@@ -92,6 +122,7 @@ class RegisterScreen : AppCompatActivity() {
         }
         return file
     }
+
 
     // Function to validate form fields
     private fun validateFields(): Boolean {

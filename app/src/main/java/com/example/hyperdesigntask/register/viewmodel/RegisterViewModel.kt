@@ -24,7 +24,19 @@ class RegisterViewModel @Inject constructor(
         viewModelScope.launch {
             _registerState.value = Resource.Loading
             val result = authRepo.registerUser(request)
-            _registerState.value = result
+
+            // Handle response distinction here
+            if (result is Resource.Success) {
+                val response = result.data
+                if (response.access_token.isNullOrEmpty() && response.user == null) {
+                    _registerState.value = Resource.Error(response.message ?: "Unknown error")
+                } else {
+                    _registerState.value = Resource.Success(response)
+                }
+            } else {
+                _registerState.value = result
+            }
         }
     }
+
 }
