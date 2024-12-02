@@ -1,29 +1,33 @@
 package com.example.hyperdesigntask.register.ui
+import android.net.Uri
 import android.os.Bundle
 import android.util.Patterns
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.hyperdesigntask.R
+import com.bumptech.glide.Glide
 import com.example.hyperdesigntask.data.model.RegisterRequest
 import com.example.hyperdesigntask.databinding.ActivityMainBinding
 import com.example.hyperdesigntask.register.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 import java.io.FileOutputStream
-
+import java.io.InputStream
 
 
 @AndroidEntryPoint
 class RegisterScreen : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var selectedImageUri: Uri? = null
+
     private val registerViewModel: RegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,13 +44,24 @@ class RegisterScreen : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        // Gallery Picker
+        val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            if (uri != null) {
+                selectedImageUri = uri
+                Glide.with(this).load(uri).into(binding.profilePhoto)
+            }
+        }
+        // Set up upload button click listener
+        binding.uploadButton.setOnClickListener {
+            pickImageLauncher.launch("image/*")
+        }
 
         // Set up sign-up button click listener
         binding.singUp.setOnClickListener {
             if (validateFields()) {
-                val fakeFile = createFakeFile()
-                val requestFile = RequestBody.create(MultipartBody.FORM, fakeFile)
-                val filePart = MultipartBody.Part.createFormData("file", fakeFile.name, requestFile)
+                val imageFile = createFileFromUri(selectedImageUri!!)
+                val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), imageFile)
+                val filePart = MultipartBody.Part.createFormData("file", imageFile.name, requestFile)
 
                 val request = RegisterRequest(
                     name = binding.name.text.toString().trim(),
@@ -63,6 +78,19 @@ class RegisterScreen : AppCompatActivity() {
                 Toast.makeText(this, "Registration triggered!", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun createFileFromUri(uri: Uri): File {
+        val inputStream: InputStream? = contentResolver.openInputStream(uri)
+        val file = File(cacheDir, "uploaded_image_${System.currentTimeMillis()}.png")
+        val outputStream = FileOutputStream(file)
+
+        inputStream?.use { input ->
+            outputStream.use { output ->
+                input.copyTo(output)
+            }
+        }
+        return file
     }
 
     // Function to validate form fields
@@ -113,13 +141,6 @@ class RegisterScreen : AppCompatActivity() {
         return isValid
     }
 
-    // Function to create a fake file
-    private fun createFakeFile(): File {
-        // Creating a temporary file for testing
-        val tempFile = File(filesDir, "fakeFile.txt")
-        FileOutputStream(tempFile).use {
-            it.write("This is a fake file for testing.".toByteArray())
-        }
-        return tempFile
-    }
+
+
 }
