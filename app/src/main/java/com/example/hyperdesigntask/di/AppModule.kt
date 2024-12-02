@@ -1,11 +1,14 @@
 package com.example.hyperdesigntask.di
 
+import android.content.Context
+import com.example.hyperdesigntask.data.local.TokenManager
 import com.example.hyperdesigntask.data.repo.AuthRepo
-import com.example.hyperdesigntask.networking.HyperDesginTaskService
+import com.example.hyperdesigntask.networking.AuthService
 import com.example.hyperdesigntask.networking.RetrofitInstance
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -14,14 +17,19 @@ import javax.inject.Singleton
 class AppModule {
     @Provides
     @Singleton
-    fun provideApi(): HyperDesginTaskService {
-        return RetrofitInstance.retrofit.create(HyperDesginTaskService::class.java)
+    fun provideApi(): AuthService {
+        return RetrofitInstance.retrofit.create(AuthService::class.java)
     }
 
 
     @Provides
     @Singleton
-    fun provideAuthRepo(api: HyperDesginTaskService): AuthRepo {
+    fun provideAuthRepo(api: AuthService): AuthRepo {
         return AuthRepo(api)
+    }
+    @Provides
+    @Singleton
+    fun provideTokenManager(@ApplicationContext context: Context): TokenManager {
+        return TokenManager(context)
     }
 }

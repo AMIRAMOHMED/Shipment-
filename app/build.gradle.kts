@@ -45,8 +45,9 @@ android {
  }
 
 dependencies {
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
 
+    implementation ("androidx.security:security-crypto:1.1.0-alpha06")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
