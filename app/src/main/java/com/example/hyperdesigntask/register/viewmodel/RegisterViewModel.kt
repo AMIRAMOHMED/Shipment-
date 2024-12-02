@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import javax.inject.Inject
 
 
@@ -23,20 +24,22 @@ class RegisterViewModel @Inject constructor(
     fun registerUser(request: RegisterRequest) {
         viewModelScope.launch {
             _registerState.value = Resource.Loading
-            val result = authRepo.registerUser(request)
+            try {
+                val response = authRepo.registerUser(request)
 
-            // Handle response distinction here
-            if (result is Resource.Success) {
-                val response = result.data
+                // Check the response for validity
                 if (response.access_token.isNullOrEmpty() && response.user == null) {
                     _registerState.value = Resource.Error(response.message ?: "Unknown error")
                 } else {
                     _registerState.value = Resource.Success(response)
                 }
-            } else {
-                _registerState.value = result
+            } catch (e: HttpException) {
+                _registerState.value = Resource.Error(e.message ?: "An error occurred", e.code())
+            } catch (e: Exception) {
+                _registerState.value = Resource.Error(e.message ?: "Unknown error")
             }
         }
     }
+
 
 }

@@ -66,20 +66,19 @@ class RegisterScreen : AppCompatActivity() {
                 val imageFile = createFileFromUri(selectedImageUri!!)
                 val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), imageFile)
                 val filePart = MultipartBody.Part.createFormData("file", imageFile.name, requestFile)
-
                 val request = RegisterRequest(
                     name = binding.name.text.toString().trim(),
                     email = binding.email.text.toString().trim(),
                     phone = binding.phone.text.toString().trim(),
                     password = binding.password.text.toString().trim(),
-                    country_id = "9", // Replace with actual value
+                    country_id = "9",
                     type = "employee",
                     file = filePart
                 )
 
                 // Trigger registration
                 registerViewModel.registerUser(request)
-                Toast.makeText(this, "Registration triggered!", Toast.LENGTH_SHORT).show()
+                showToast("Registration triggered!")
                 observeRegisterState()
 
             }
@@ -95,15 +94,11 @@ class RegisterScreen : AppCompatActivity() {
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
                         val user = state.data.user
-                        Snackbar.make(
-                            binding.root,
-                            "Registration successful for ${user?.name ?: "unknown"}",
-                            Snackbar.LENGTH_LONG
-                        ).show()
+                        showSnackbar("Registration successful for ${user?.name ?: "unknown"}")
                     }
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
-                        Snackbar.make(binding.root, state.message ?: "Unknown error", Snackbar.LENGTH_LONG).show()
+                        showSnackbar(state.message)
                     }
                 }
             }
@@ -128,23 +123,18 @@ class RegisterScreen : AppCompatActivity() {
     private fun validateFields(): Boolean {
         var isValid = true
 
-        // Validate name
         if (binding.name.text.isNullOrEmpty()) {
             binding.name.error = "Please enter your name"
             isValid = false
         } else {
             binding.name.error = null
         }
-
-        // Validate email
         if (binding.email.text.isNullOrEmpty() || !Patterns.EMAIL_ADDRESS.matcher(binding.email.text).matches()) {
             binding.email.error = "Please enter a valid email"
             isValid = false
         } else {
             binding.email.error = null
         }
-
-        // Validate phone
         val phoneRegex = Regex("^01[0-2][0-9]{8}\$")
         if (binding.phone.text.isNullOrEmpty() || !phoneRegex.matches(binding.phone.text.toString())) {
             binding.phone.error = "Please enter a valid phone number"
@@ -152,16 +142,12 @@ class RegisterScreen : AppCompatActivity() {
         } else {
             binding.phone.error = null
         }
-
-        // Validate password
         if (binding.password.text.isNullOrEmpty()) {
             binding.password.error = "Please enter your password"
             isValid = false
         } else {
             binding.password.error = null
         }
-
-        // Validate repeated password
         if (binding.repeatedPassword.text.isNullOrEmpty() || binding.repeatedPassword.text.toString() != binding.password.text.toString()) {
             binding.repeatedPassword.error = "Passwords do not match"
             isValid = false
@@ -171,7 +157,11 @@ class RegisterScreen : AppCompatActivity() {
 
         return isValid
     }
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
+    }
 
-
-
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
 }
