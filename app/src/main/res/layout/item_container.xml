@@ -1,0 +1,66 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="container"
+            type="com.example.hyperdesigntask.data.model.ContainerDetails" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@color/surface"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/containerNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{"Container Number: " + container.container_number}'
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/containerSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{"Size: " + container.size}'
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/containerWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{"Weight: " + container.weight}'
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/containerDimension"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{"Dimension: " + container.dimension}'
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/text_secondary" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

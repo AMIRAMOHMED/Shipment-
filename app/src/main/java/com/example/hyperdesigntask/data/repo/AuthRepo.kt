@@ -8,6 +8,8 @@ import com.example.hyperdesigntask.data.model.RefreshRequest
 import com.example.hyperdesigntask.data.model.RegisterRequest
 import com.example.hyperdesigntask.data.model.RegisterResponse
 import com.example.hyperdesigntask.data.model.RequestQuotation
+import com.example.hyperdesigntask.data.model.ShipmentDetailsRequest
+import com.example.hyperdesigntask.data.model.ShipmentDetailsResponse
 import com.example.hyperdesigntask.data.model.ShippmentsResponse
 import com.example.hyperdesigntask.networking.AuthService
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -60,5 +62,9 @@ class AuthRepo @Inject constructor(
     suspend fun getShippments(page: String): ShippmentsResponse {
         val request = PageRequest(page)
         return api.getShippments(request)
+    }
+    suspend fun getShipmentDetails(id: String): ShipmentDetailsResponse {
+        val request = ShipmentDetailsRequest(id)
+        return api.getShipmentDetails(request)
     }
 }

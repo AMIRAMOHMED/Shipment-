@@ -1,6 +1,7 @@
 package com.example.hyperdesigntask.di
 
 import android.content.Context
+import android.util.Log
 import com.example.hyperdesigntask.data.local.TokenManager
 import com.example.hyperdesigntask.data.repo.AuthRepo
 import com.example.hyperdesigntask.networking.AuthService
@@ -48,6 +49,7 @@ class AppModule {
                 .addInterceptor { chain ->
                     val requestBuilder = chain.request().newBuilder()
                     val token = tokenManager.getAccessToken()
+                    Log.i("Token", "provideOkHttpClient: "+token)
                     if (!token.isNullOrEmpty()) {
                         requestBuilder.addHeader("Authorization", "Bearer $token")
                     }

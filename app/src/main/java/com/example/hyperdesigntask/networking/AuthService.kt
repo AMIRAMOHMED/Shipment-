@@ -4,6 +4,8 @@ import com.example.hyperdesigntask.data.model.PageRequest
 import com.example.hyperdesigntask.data.model.RefreshRequest
 import com.example.hyperdesigntask.data.model.RegisterResponse
 import com.example.hyperdesigntask.data.model.RequestQuotation
+import com.example.hyperdesigntask.data.model.ShipmentDetailsRequest
+import com.example.hyperdesigntask.data.model.ShipmentDetailsResponse
 import com.example.hyperdesigntask.data.model.ShippmentsResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -44,4 +46,7 @@ interface AuthService {
 
     @POST("getShippments")
     suspend fun getShippments(@Body request: PageRequest): ShippmentsResponse
+
+    @POST("shippment-details")
+    suspend fun getShipmentDetails(@Body request: ShipmentDetailsRequest): ShipmentDetailsResponse
 }

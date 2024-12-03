@@ -34,4 +34,5 @@
     <string name="status_pending">Status: Pending</string>
     <string name="shipment_description">Shipment Description</string>
     <string name="shipment_name">Shipment Name</string>
+    <string name="containersm">Containers:</string>
 </resources>
