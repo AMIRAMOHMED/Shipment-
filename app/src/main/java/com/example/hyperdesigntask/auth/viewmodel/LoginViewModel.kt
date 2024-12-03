@@ -43,5 +43,8 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
+    fun getUserId(): String? {
+        return tokenManager.getUserId()
+    }
 
 }

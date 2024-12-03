@@ -30,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
         // Set up ViewBinding
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        checkAndNavigate()
 
         // Apply edge-to-edge layout
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
@@ -58,7 +59,14 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
+    private fun checkAndNavigate() {
+        val userId = loginViewModel.getUserId()
+        if (!userId.isNullOrEmpty()) {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
     private fun observeLoginState() {
         lifecycleScope.launchWhenStarted {
             loginViewModel.loginState.collect { state ->
