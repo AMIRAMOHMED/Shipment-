@@ -8,7 +8,7 @@ import com.example.hyperdesigntask.data.repo.ShipmentRepo
 import com.example.hyperdesigntask.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
@@ -18,18 +18,16 @@ class HomeViewModel  @Inject constructor(
 
 
     private val _shippments = MutableStateFlow<Resource<ShippmentsResponse>>(Resource.Loading)
-    val shippments: StateFlow<Resource<ShippmentsResponse> >get() = _shippments
+    val shippments  = _shippments.asStateFlow()
 
         fun fetchShippments(page: String) {
             viewModelScope.launch {
                 _shippments.value = Resource.Loading
-
                 try {
                     val response = shipmentRepository.getShipments(page)
                     _shippments.value = Resource.Success(response)
                 } catch (e: Exception) {
                     _shippments.value = Resource.Error("Error fetching shipments: ${e.localizedMessage}")
-                    Log.e("HomeViewModel", "Error fetching shipments", e)
                 }
             }
         }

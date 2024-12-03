@@ -57,7 +57,6 @@ class HomeFragment : Fragment() ,OnShipmentClickListener {
                         resources.data.let {
                             adapter.setShipmentItems(it.shippments.data)
                         }
-
                     }
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE

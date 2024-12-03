@@ -1,27 +1,22 @@
 package com.example.hyperdesigntask.data.networking
-import com.example.hyperdesigntask.data.model.ApiResponse
-import com.example.hyperdesigntask.data.model.PageRequest
+import com.example.hyperdesigntask.data.model.CountriesResponse
 import com.example.hyperdesigntask.data.model.RefreshRequest
 import com.example.hyperdesigntask.data.model.RefreshResponse
 import com.example.hyperdesigntask.data.model.RegisterResponse
-import com.example.hyperdesigntask.data.model.RequestQuotation
-import com.example.hyperdesigntask.data.model.ShipmentDetailsRequest
-import com.example.hyperdesigntask.data.model.ShipmentDetailsResponse
-import com.example.hyperdesigntask.data.model.ShippmentsResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 
 interface AuthService {
     @POST("refresh")
-    suspend fun refreshAccessToken(@Body request: RefreshRequest): RefreshResponse
-
-    @POST("requestQuotation")
-    suspend fun sendRequestQuotation(@Body request: RequestQuotation): ApiResponse
-
+    suspend fun refreshAccessToken(
+        @Body request: RefreshRequest,
+        @Header("Cookie") authHeader: String
+    ): RefreshResponse
     @Multipart
     @POST("register")
     suspend fun registerUser(
@@ -31,7 +26,7 @@ interface AuthService {
         @Part("password") password: RequestBody,
         @Part("country_id") countryId: RequestBody,
         @Part("type") type: RequestBody,
-        @Part file:MultipartBody.Part
+        @Part file: MultipartBody.Part
     ): RegisterResponse
 
     @Multipart
@@ -43,9 +38,7 @@ interface AuthService {
     ): RegisterResponse
 
 
-    @POST("getShippments")
-    suspend fun getShippments(@Body request: PageRequest): ShippmentsResponse
+    @POST("countries")
+    suspend fun getCountries(): CountriesResponse
 
-    @POST("shippment-details")
-    suspend fun getShipmentDetails(@Body request: ShipmentDetailsRequest): ShipmentDetailsResponse
 }

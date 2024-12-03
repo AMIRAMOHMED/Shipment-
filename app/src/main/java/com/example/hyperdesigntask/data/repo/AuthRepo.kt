@@ -1,17 +1,11 @@
 package com.example.hyperdesigntask.data.repo
 import android.annotation.SuppressLint
-import android.util.Log
 import com.example.hyperdesigntask.data.local.TokenManager
-import com.example.hyperdesigntask.data.model.ApiResponse
+import com.example.hyperdesigntask.data.model.CountriesResponse
 import com.example.hyperdesigntask.data.model.LoginRequest
-import com.example.hyperdesigntask.data.model.PageRequest
 import com.example.hyperdesigntask.data.model.RefreshRequest
 import com.example.hyperdesigntask.data.model.RegisterRequest
 import com.example.hyperdesigntask.data.model.RegisterResponse
-import com.example.hyperdesigntask.data.model.RequestQuotation
-import com.example.hyperdesigntask.data.model.ShipmentDetailsRequest
-import com.example.hyperdesigntask.data.model.ShipmentDetailsResponse
-import com.example.hyperdesigntask.data.model.ShippmentsResponse
 import com.example.hyperdesigntask.data.networking.AuthService
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.HttpException
@@ -36,19 +30,24 @@ class AuthRepo @Inject constructor(
     @SuppressLint("SuspiciousIndentation")
     suspend fun refreshToken(id: String) {
         try {
-            Log.i("refresh", "AuthRepo - Refresh Token API Called with ID: $id")
-            val response = api.refreshAccessToken(RefreshRequest(id))
-            Log.i("refresh", "AuthRepo - Response Received: $response")
-            tokenManger.saveAccessToken(response.access_token)
-            Log.i("refresh", "AuthRepo - New Token Saved")
+            val header =  mapOf(
+                "Authorization" to "Bearer YOUR_TOKEN",
+                "Content-Type" to "application/json"
+            )
+            val response = api.refreshAccessToken(RefreshRequest("1",),
+                "eyJpdiI6IkFvQnlVZG5CMjNsQ2RQZGFyeUxwMmc9PSIsInZhbHVlIjoiQUZFR1wvbnQwdEM5azFSWGhqNE0wY1FoUXRCM3pjcXhIXC9XNGNjMFV4REJEZG1hdmJvVnBBaDAyWXh0SVNEZWhoRUQ0QkM2T1JLU2xIVzREMmsycGg3Zz09IiwibWFjIjoiNmRjMTg4OWQ2ZDRmODkxZWNmYTRlNWVjYzVjNDhlNzJjYWFmNjBkMDI4NzI4ZjE0MTQ5Y2M3ZmUzOWM2YjgzMSJ9"
+
+
+                )
+            tokenManger.saveAccessToken(response.access_token.orEmpty())
         } catch (e: HttpException) {
             if (e.code() == 500) {
-                Log.e("refresh", "Server Error: ${e.response()?.errorBody()?.string()}")
+
             } else {
-                Log.e("refresh", "HTTP Error: ${e.code()} - ${e.message()}")
+
             }
         } catch (e: Exception) {
-            Log.e("refresh", "Unexpected Error: ${e.message}")
+
         }
     }
 
@@ -58,21 +57,10 @@ class AuthRepo @Inject constructor(
             password = request.password.toRequestBody(),
             token = request.token.toRequestBody(),
             )
+    }
 
+    suspend fun getCountries(): CountriesResponse {
+        return api.getCountries()
+    }
 
-    }
-    suspend fun  sendRequestQuotation(request: RequestQuotation): ApiResponse
-    {
-        return  api.sendRequestQuotation(
-            request
-        )
-    }
-    suspend fun getShippments(page: String): ShippmentsResponse {
-        val request = PageRequest(page)
-        return api.getShippments(request)
-    }
-    suspend fun getShipmentDetails(id: String): ShipmentDetailsResponse {
-        val request = ShipmentDetailsRequest(id)
-        return api.getShipmentDetails(request)
-    }
 }

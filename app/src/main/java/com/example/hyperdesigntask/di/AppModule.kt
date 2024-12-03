@@ -65,7 +65,7 @@ class AppModule {
 
                 // Get token from TokenManager
                 val token = tokenManager.getAccessToken()
-                Log.i("refresh", "Access Token Retrieved: $token")
+
 
                 // Conditionally add Authorization Header
                 if (!originalRequest.url.toString().contains("refresh")) {
