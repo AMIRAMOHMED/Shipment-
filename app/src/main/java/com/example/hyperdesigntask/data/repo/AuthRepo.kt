@@ -1,12 +1,15 @@
 package com.example.hyperdesigntask.data.repo
 import android.annotation.SuppressLint
 import com.example.hyperdesigntask.data.local.TokenManager
+import com.example.hyperdesigntask.data.model.ApiResponse
 import com.example.hyperdesigntask.data.model.LoginRequest
 import com.example.hyperdesigntask.data.model.RefreshRequest
 import com.example.hyperdesigntask.data.model.RegisterRequest
 import com.example.hyperdesigntask.data.model.RegisterResponse
+import com.example.hyperdesigntask.data.model.RequestQuotation
 import com.example.hyperdesigntask.networking.AuthService
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
 import javax.inject.Inject
 
 class AuthRepo @Inject constructor(
@@ -46,6 +49,12 @@ class AuthRepo @Inject constructor(
             )
 
 
+    }
+    suspend fun  sendRequestQuotation(request: RequestQuotation): ApiResponse
+    {
+        return  api.sendRequestQuotation(
+            request
+        )
     }
 
 }

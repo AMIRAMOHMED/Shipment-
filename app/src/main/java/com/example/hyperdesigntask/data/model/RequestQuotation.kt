@@ -1,7 +1,8 @@
 package com.example.hyperdesigntask.data.model
 
+import com.google.gson.annotations.SerializedName
 data class RequestQuotation(
-    val shipmentName: String,
+    @SerializedName("shipment_name") val shipmentName: String,
     val description: String,
     val quantity: String,
     val containerNumber: List<Container>,
