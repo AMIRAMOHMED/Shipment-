@@ -2,6 +2,7 @@ package com.example.hyperdesigntask.networking
 import com.example.hyperdesigntask.data.model.ApiResponse
 import com.example.hyperdesigntask.data.model.PageRequest
 import com.example.hyperdesigntask.data.model.RefreshRequest
+import com.example.hyperdesigntask.data.model.RefreshResponse
 import com.example.hyperdesigntask.data.model.RegisterResponse
 import com.example.hyperdesigntask.data.model.RequestQuotation
 import com.example.hyperdesigntask.data.model.ShipmentDetailsRequest
@@ -15,13 +16,11 @@ import retrofit2.http.POST
 import retrofit2.http.Part
 
 interface AuthService {
+    @POST("refresh")
+    suspend fun refreshAccessToken(@Body request: RefreshRequest): RefreshResponse
+
     @POST("requestQuotation")
     suspend fun sendRequestQuotation(@Body request: RequestQuotation): ApiResponse
-    @POST("refresh")
-
-    suspend fun refreshToken(
-        @Body requestBody: RefreshRequest
-    ): RegisterResponse
 
     @Multipart
     @POST("register")

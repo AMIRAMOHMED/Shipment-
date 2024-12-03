@@ -19,26 +19,19 @@ class RegisterViewModel @Inject constructor(
     private val authRepo: AuthRepo,
     private  val tokenManager: TokenManager,
 ) : ViewModel() {
-
     private val _registerState = MutableStateFlow<Resource<RegisterResponse>>(Resource.Loading)
     val registerState: StateFlow<Resource<RegisterResponse>> get() = _registerState
 
-    fun refreshToken(){
+    fun refreshToken() {
         viewModelScope.launch {
             try {
-                val response = authRepo.refreshToken()
-                Log.i("Refresh", "refreshToken: ++ ${response.access_token}")
-//                tokenManager.saveAccessToken(response.access_token.toString())
-            } catch (e: HttpException) {
-                Log.i("Refresh", "refreshToken: ++ ${e.message}")
-                _registerState.value = Resource.Error(e.message ?: "An error occurred", e.code())
+                val newToken = authRepo.refreshToken("200")
+                Log.d("refresh", "New access token: $newToken")
             } catch (e: Exception) {
-                Log.i("Refresh", "refreshToken: ++ ${e.message}")
-                _registerState.value = Resource.Error(e.message ?: "Unknown error")
+                Log.e("refresh", "Failed to refresh token: ${e.message}")
             }
         }
     }
-
 
     fun registerUser(request: RegisterRequest) {
         viewModelScope.launch {
