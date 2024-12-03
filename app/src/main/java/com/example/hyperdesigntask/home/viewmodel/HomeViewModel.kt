@@ -3,9 +3,8 @@ package com.example.hyperdesigntask.home.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.hyperdesigntask.data.local.TokenManager
 import com.example.hyperdesigntask.data.model.ShippmentsResponse
-import com.example.hyperdesigntask.data.repo.AuthRepo
+import com.example.hyperdesigntask.data.repo.ShipmentRepo
 import com.example.hyperdesigntask.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel  @Inject constructor(
-    private val authRepo: AuthRepo,
+    private val shipmentRepository: ShipmentRepo
 ) : ViewModel() {
 
 
@@ -26,7 +25,7 @@ class HomeViewModel  @Inject constructor(
                 _shippments.value = Resource.Loading
 
                 try {
-                    val response = authRepo.getShippments(page)
+                    val response = shipmentRepository.getShipments(page)
                     _shippments.value = Resource.Success(response)
                 } catch (e: Exception) {
                     _shippments.value = Resource.Error("Error fetching shipments: ${e.localizedMessage}")

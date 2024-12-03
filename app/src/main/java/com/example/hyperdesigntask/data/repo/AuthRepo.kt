@@ -12,7 +12,7 @@ import com.example.hyperdesigntask.data.model.RequestQuotation
 import com.example.hyperdesigntask.data.model.ShipmentDetailsRequest
 import com.example.hyperdesigntask.data.model.ShipmentDetailsResponse
 import com.example.hyperdesigntask.data.model.ShippmentsResponse
-import com.example.hyperdesigntask.networking.AuthService
+import com.example.hyperdesigntask.data.networking.AuthService
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.HttpException
 import javax.inject.Inject

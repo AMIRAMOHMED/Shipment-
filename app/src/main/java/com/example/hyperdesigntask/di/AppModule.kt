@@ -4,7 +4,9 @@ import android.content.Context
 import android.util.Log
 import com.example.hyperdesigntask.data.local.TokenManager
 import com.example.hyperdesigntask.data.repo.AuthRepo
-import com.example.hyperdesigntask.networking.AuthService
+import com.example.hyperdesigntask.data.networking.AuthService
+import com.example.hyperdesigntask.data.networking.ShipmentService
+import com.example.hyperdesigntask.data.repo.ShipmentRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,6 +29,11 @@ class AppModule {
         tokenManager: TokenManager
     ): AuthRepo {
         return AuthRepo(api, tokenManager)
+    }
+    @Provides
+    @Singleton
+    fun provideShipmentRepository(api: ShipmentService): ShipmentRepo {
+        return ShipmentRepo(api)
     }
 
     @Provides
@@ -102,5 +109,12 @@ class AppModule {
     @Singleton
     fun provideAuthService(retrofit: Retrofit): AuthService {
         return retrofit.create(AuthService::class.java)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideShipmentService(retrofit: Retrofit): ShipmentService {
+        return retrofit.create(ShipmentService::class.java)
     }
 }

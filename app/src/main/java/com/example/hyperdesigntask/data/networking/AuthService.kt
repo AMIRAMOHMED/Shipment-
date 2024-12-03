@@ -1,4 +1,4 @@
-package com.example.hyperdesigntask.networking
+package com.example.hyperdesigntask.data.networking
 import com.example.hyperdesigntask.data.model.ApiResponse
 import com.example.hyperdesigntask.data.model.PageRequest
 import com.example.hyperdesigntask.data.model.RefreshRequest

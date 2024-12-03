@@ -3,7 +3,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hyperdesigntask.data.model.ApiResponse
 import com.example.hyperdesigntask.data.model.RequestQuotation
-import com.example.hyperdesigntask.data.repo.AuthRepo
+import com.example.hyperdesigntask.data.repo.ShipmentRepo
 import com.example.hyperdesigntask.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
 class RequestQuotationViewModel @Inject constructor(
-    private val authRepo: AuthRepo
+    private val shipmentRepository: ShipmentRepo
 ) : ViewModel() {
     private val _requestQuotationState = MutableStateFlow<Resource<ApiResponse>>(Resource.Loading)
     val requestQuotationState: StateFlow<Resource<ApiResponse>> get() = _requestQuotationState
@@ -21,7 +21,7 @@ class RequestQuotationViewModel @Inject constructor(
         viewModelScope.launch {
             _requestQuotationState.value = Resource.Loading
             try {
-                val response = authRepo.sendRequestQuotation(request)
+                val response = shipmentRepository.sendRequestQuotation(request)
 
                 if (response.message == "success") {
                     _requestQuotationState.value = Resource.Success(response)

@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.example.hyperdesigntask.data.model.RegisterRequest
 import com.example.hyperdesigntask.databinding.ActivityMainBinding
 import com.example.hyperdesigntask.auth.viewmodel.RegisterViewModel
+import com.example.hyperdesigntask.home.ui.HomeActivity
 import com.example.hyperdesigntask.utils.Resource
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -88,10 +89,10 @@ class RegisterScreen : AppCompatActivity() {
 //                observeRegisterState()
 //
 //            }
-//            binding.textButton2.setOnClickListener{
-//                val intent = Intent(this, LoginActivity::class.java)
-//                startActivity(intent)
-//            }
+            binding.textButton2.setOnClickListener{
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
 //        }
     }
 
@@ -106,6 +107,9 @@ class RegisterScreen : AppCompatActivity() {
                         binding.progressBar.visibility = View.GONE
                         val user = state.data.user
                         showSnackbar("Registration successful for ${user?.name ?: "unknown"}")
+                        val intent = Intent(this@RegisterScreen, HomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     }
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
