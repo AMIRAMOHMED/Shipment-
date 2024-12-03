@@ -1,8 +1,10 @@
 package com.example.hyperdesigntask.networking
 import com.example.hyperdesigntask.data.model.RefreshRequest
 import com.example.hyperdesigntask.data.model.RegisterResponse
+import com.example.hyperdesigntask.data.model.RequestQuotation
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.Response
 import retrofit2.http.Body
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -35,4 +37,8 @@ interface AuthService {
         @Part("token") token: RequestBody,
     ): RegisterResponse
 
+
+
+    @POST("requestQuotation")
+    suspend fun sendRequestQuotation(@Body request: RequestQuotation): Response
 }

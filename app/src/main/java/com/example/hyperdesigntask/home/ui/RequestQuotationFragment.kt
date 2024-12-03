@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import com.example.hyperdesigntask.R
+import com.example.hyperdesigntask.data.model.Container
+import com.example.hyperdesigntask.data.model.RequestQuotation
 import com.example.hyperdesigntask.databinding.FragmentRequestQuotationBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,19 +26,32 @@ class RequestQuotationFragment : Fragment() {
 
             binding.containerList.addView(containerView)
         }
-binding.quantity
-        binding.nameOfShipment
-        binding.description
-        binding.comment
+
         return binding.root
     }
 
+    private fun createRequestQuotation(): RequestQuotation {
+        val shipmentName = binding.nameOfShipment.text.toString()
+        val description = binding.description.text.toString()
+        val quantity = binding.quantity.text.toString()
+        val comment = binding.comment.text.toString()
+
+        val containers = collectContainerData()
+
+        return RequestQuotation(
+            shipmentName = shipmentName,
+            description = description,
+            quantity = quantity,
+            containerNumber = containers,
+            comment = comment
+        )
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-    private fun collectContainerData(): List<Map<String, String>> {
-        val containers = mutableListOf<Map<String, String>>()
+    private fun collectContainerData(): List<Container> {
+        val containers = mutableListOf<Container>()
 
         for (i in 0 until binding.containerList.childCount) {
             val containerView = binding.containerList.getChildAt(i) as ViewGroup
@@ -47,11 +62,11 @@ binding.quantity
             val dimension = containerView.findViewById<EditText>(R.id.et_container_dimension).text.toString()
 
             containers.add(
-                mapOf(
-                    "number" to number,
-                    "size" to size,
-                    "weight" to weight,
-                    "dimension" to dimension
+                Container(
+                    number = number,
+                    size = size,
+                    weight = weight,
+                    dimension = dimension
                 )
             )
         }
