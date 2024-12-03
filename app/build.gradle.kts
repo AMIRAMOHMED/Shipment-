@@ -45,7 +45,7 @@ android {
  }
 
 dependencies {
-
+    implementation ("androidx.work:work-runtime-ktx:2.8.0")
     implementation ("androidx.security:security-crypto:1.1.0-alpha06")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")

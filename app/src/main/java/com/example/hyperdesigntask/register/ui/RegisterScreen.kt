@@ -49,18 +49,23 @@ class RegisterScreen : AppCompatActivity() {
             insets
         }
         // Gallery Picker
-        val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            if (uri != null) {
-                selectedImageUri = uri
-                Glide.with(this).load(uri).into(binding.profilePhoto)
+        val pickImageLauncher =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+                if (uri != null) {
+                    selectedImageUri = uri
+                    Glide.with(this).load(uri).into(binding.profilePhoto)
+                }
             }
-        }
         // Set up upload button click listener
         binding.uploadButton.setOnClickListener {
             pickImageLauncher.launch("image/*")
         }
+//        binding.singUp.setOnClickListener {
+//            registerViewModel.refreshToken()
+//
+//        }
 
-        // Set up sign-up button click listener
+//         Set up sign-up button click listener
         binding.singUp.setOnClickListener {
             if (validateFields()) {
                 val imageFile = createFileFromUri(selectedImageUri!!)
@@ -84,6 +89,7 @@ class RegisterScreen : AppCompatActivity() {
             }
         }
     }
+
     private fun observeRegisterState() {
         lifecycleScope.launchWhenStarted {
             registerViewModel.registerState.collect { state ->

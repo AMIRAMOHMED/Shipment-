@@ -21,15 +21,22 @@ class AppModule {
         return RetrofitInstance.retrofit.create(AuthService::class.java)
     }
 
+    @Provides
+    @Singleton
+    fun provideAuthRepo(
+        api: AuthService,
+        tokenManager: TokenManager
+    ): AuthRepo {
+        return AuthRepo(api, tokenManager)
+    }
 
     @Provides
     @Singleton
-    fun provideAuthRepo(api: AuthService): AuthRepo {
-        return AuthRepo(api)
-    }
-    @Provides
-    @Singleton
-    fun provideTokenManager(@ApplicationContext context: Context): TokenManager {
+    fun provideTokenManager(
+        @ApplicationContext context: Context,
+    ): TokenManager {
         return TokenManager(context)
     }
+
+
 }

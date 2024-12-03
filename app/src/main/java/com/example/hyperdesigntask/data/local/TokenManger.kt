@@ -12,6 +12,7 @@ class TokenManager @Inject constructor(
         private const val PREFS_NAME = "encrypted_prefs"
         private const val ACCESS_TOKEN = "access_token"
         private const val REFRESH_TOKEN = "refresh_token"
+        private  const val  USER_ID = "user_id"
     }
 
     private val masterKey: MasterKey by lazy {
@@ -38,20 +39,30 @@ class TokenManager @Inject constructor(
             .apply()
     }
 
-    // Save the refresh token individually
+    // Get the refresh token individually
     fun saveRefreshToken(refreshToken: String) {
         encryptedSharedPreferences.edit()
             .putString(REFRESH_TOKEN, refreshToken)
             .apply()
     }
 
-    // Retrieve the access token
+    // Get the access token
     fun getAccessToken(): String? {
         return encryptedSharedPreferences.getString(ACCESS_TOKEN, null)
     }
 
-    // Retrieve the refresh token
+    // Get the refresh token
     fun getRefreshToken(): String? {
         return encryptedSharedPreferences.getString(REFRESH_TOKEN, null)
+    }
+
+    fun saveUserId(userId: String) {
+        encryptedSharedPreferences.edit()
+            .putString(USER_ID, userId)
+            .apply()
+    }
+
+    fun getUserId(): String? {
+        return encryptedSharedPreferences.getString(USER_ID, null)
     }
 }
