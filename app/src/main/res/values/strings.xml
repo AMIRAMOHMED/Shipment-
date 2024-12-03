@@ -25,4 +25,10 @@
     <string name="request_quotion">Request Quotion</string>
     <string name="containers">Containers</string>
     <string name="enter_shipement_name">Enter Shipement name</string>
+    <string name="name_of_shipment">Name of Shipment</string>
+    <string name="description">Description</string>
+    <string name="enter_description">Enter description</string>
+    <string name="quantity">Quantity</string>
+    <string name="comment">Comment</string>
+    <string name="write_your_comment">write your comment</string>
 </resources>

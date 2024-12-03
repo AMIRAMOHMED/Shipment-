@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxBackgroundMode="outline"
+        app:hintTextColor="@color/primary_dark"
+        app:boxStrokeColor="@color/primary_dark"
+        app:boxStrokeWidth="1dp"
+        android:hint="Container Number">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_container_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_secondary"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxBackgroundMode="outline"
+        app:hintTextColor="@color/primary_dark"
+        app:boxStrokeColor="@color/primary_dark"
+        app:boxStrokeWidth="1dp"
+        android:hint="Container Size">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_container_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_secondary"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxBackgroundMode="outline"
+        app:hintTextColor="@color/primary_dark"
+        app:boxStrokeColor="@color/primary_dark"
+        app:boxStrokeWidth="1dp"
+        android:hint="Container Weight">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_container_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_secondary"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxBackgroundMode="outline"
+        app:hintTextColor="@color/primary_dark"
+        app:boxStrokeColor="@color/primary_dark"
+        app:boxStrokeWidth="1dp"
+        android:hint="Container Dimension">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_container_dimension"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_secondary"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>
