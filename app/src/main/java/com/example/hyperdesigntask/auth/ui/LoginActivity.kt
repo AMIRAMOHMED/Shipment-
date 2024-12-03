@@ -1,4 +1,5 @@
 package com.example.hyperdesigntask.auth.ui
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -11,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.hyperdesigntask.auth.viewmodel.LoginViewModel
 import com.example.hyperdesigntask.data.model.LoginRequest
 import com.example.hyperdesigntask.databinding.ActivityLoginBinding
+import com.example.hyperdesigntask.home.ui.HomeActivity
 import com.example.hyperdesigntask.utils.Resource
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +38,10 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
 
-
+        binding.textButton2.setOnClickListener{
+            val intent = Intent(this, RegisterScreen::class.java)
+            startActivity(intent)
+        }
         binding.login.setOnClickListener {
 
 
@@ -64,7 +69,9 @@ class LoginActivity : AppCompatActivity() {
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
                         val user = state.data.user
-                        showSnackbar("Registration successful for ${user?.name ?: "unknown"}")
+                        showSnackbar("Welcome ${user?.name ?: "unknown"}")
+                        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                        startActivity(intent)
                     }
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE

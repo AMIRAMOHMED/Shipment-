@@ -27,7 +27,9 @@ class AuthRepo @Inject constructor(
 
     @SuppressLint("SuspiciousIndentation")
     suspend fun  refreshToken():RegisterResponse{
-        val userId = tokenManger.getUserId()
+//        val userId = tokenManger.getUserId()
+        val userId = "176"
+
         userId?.let {
          val request =   RefreshRequest(
              id = userId

@@ -19,4 +19,10 @@
     <string name="name">Name</string>
     <string name="login_with_valid_number">Login with valid number</string>
     <string name="don_t_have_an_account">don\'t_have_an_account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_container">Add Container</string>
+    <string name="request_quotion">Request Quotion</string>
+    <string name="containers">Containers</string>
+    <string name="enter_shipement_name">Enter Shipement name</string>
 </resources>

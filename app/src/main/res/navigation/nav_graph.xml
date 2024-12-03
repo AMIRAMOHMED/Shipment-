@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.hyperdesigntask.home.ui.HomeFragment"
+        android:label="HomeFragment">
+        <action
+            android:id="@+id/action_homeFragment_to_requestQuotationFragment"
+            app:destination="@id/requestQuotationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/requestQuotationFragment"
+        android:name="com.example.hyperdesigntask.home.ui.RequestQuotationFragment"
+        android:label="RequestQuotationFragment" />
+</navigation>

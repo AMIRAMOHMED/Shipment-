@@ -45,6 +45,8 @@ android {
  }
 
 dependencies {
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.3")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.7.3")
     implementation ("androidx.work:work-runtime-ktx:2.8.0")
     implementation ("androidx.security:security-crypto:1.1.0-alpha06")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
