@@ -26,4 +26,13 @@ interface AuthService {
         @Part("type") type: RequestBody,
         @Part file:MultipartBody.Part
     ): RegisterResponse
+
+    @Multipart
+    @POST("login")
+    suspend fun loginUer(
+        @Part("phone") phone: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("token") token: RequestBody,
+    ): RegisterResponse
+
 }

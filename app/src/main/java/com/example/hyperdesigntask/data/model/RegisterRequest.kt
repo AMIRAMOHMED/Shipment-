@@ -1,7 +1,6 @@
 package com.example.hyperdesigntask.data.model
 
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 
 data class RegisterRequest(
     val name: String,

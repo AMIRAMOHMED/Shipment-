@@ -17,4 +17,6 @@
     <string name="upload">Upload</string>
     <string name="enter_your_name">Enter your name</string>
     <string name="name">Name</string>
+    <string name="login_with_valid_number">Login with valid number</string>
+    <string name="don_t_have_an_account">don\'t_have_an_account</string>
 </resources>

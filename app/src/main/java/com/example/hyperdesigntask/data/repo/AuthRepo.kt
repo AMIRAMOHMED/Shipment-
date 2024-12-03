@@ -1,6 +1,7 @@
 package com.example.hyperdesigntask.data.repo
 import android.annotation.SuppressLint
 import com.example.hyperdesigntask.data.local.TokenManager
+import com.example.hyperdesigntask.data.model.LoginRequest
 import com.example.hyperdesigntask.data.model.RefreshRequest
 import com.example.hyperdesigntask.data.model.RegisterRequest
 import com.example.hyperdesigntask.data.model.RegisterResponse
@@ -34,4 +35,15 @@ class AuthRepo @Inject constructor(
            return  api.refreshToken(request)
         } ?: throw IllegalStateException("User ID is null")
     }
+
+    suspend fun loginUer(request: LoginRequest): RegisterResponse {
+        return api.loginUer(
+            phone = request.phone.toRequestBody(),
+            password = request.password.toRequestBody(),
+            token = request.token.toRequestBody(),
+            )
+
+
+    }
+
 }

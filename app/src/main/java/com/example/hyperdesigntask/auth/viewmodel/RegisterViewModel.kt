@@ -1,4 +1,4 @@
-package com.example.hyperdesigntask.register.viewmodel
+package com.example.hyperdesigntask.auth.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -10,9 +10,7 @@ class RetrofitInstance {
         val retrofit by lazy {
             val logging = HttpLoggingInterceptor()
             logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-
             val client = OkHttpClient.Builder().addInterceptor(logging).build()
-
             Retrofit.Builder()
                 .baseUrl("https://www.hyper-design.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())

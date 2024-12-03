@@ -1,4 +1,4 @@
-package com.example.hyperdesigntask.register.ui
+package com.example.hyperdesigntask.auth.ui
 import android.net.Uri
 import android.os.Bundle
 import android.util.Patterns
@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.hyperdesigntask.data.model.RegisterRequest
 import com.example.hyperdesigntask.databinding.ActivityMainBinding
-import com.example.hyperdesigntask.register.viewmodel.RegisterViewModel
+import com.example.hyperdesigntask.auth.viewmodel.RegisterViewModel
 import com.example.hyperdesigntask.utils.Resource
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
