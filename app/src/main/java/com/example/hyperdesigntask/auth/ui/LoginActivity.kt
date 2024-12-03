@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
         // Set up ViewBinding
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        checkAndNavigate()
+        checkAndNavigate()
 
         // Apply edge-to-edge layout
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->

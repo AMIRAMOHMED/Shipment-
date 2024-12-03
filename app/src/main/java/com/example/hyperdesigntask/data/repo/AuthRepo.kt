@@ -28,7 +28,7 @@ class AuthRepo @Inject constructor(
     }
 
     @SuppressLint("SuspiciousIndentation")
-    suspend fun refreshToken(id: String) {
+    suspend fun refreshToken() {
         try {
             val header =  mapOf(
                 "Authorization" to "Bearer YOUR_TOKEN",

@@ -1,9 +1,11 @@
 package com.example.hyperdesigntask.auth.ui
+import android.R
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -50,6 +52,8 @@ class RegisterScreen : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        registerViewModel.fetchCountries()
+        observeCountries()
         // Gallery Picker
         val pickImageLauncher =
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
@@ -62,39 +66,58 @@ class RegisterScreen : AppCompatActivity() {
         binding.uploadButton.setOnClickListener {
             pickImageLauncher.launch("image/*")
         }
-        binding.singUp.setOnClickListener {
-            registerViewModel.refreshToken()
 
-        }
 
 //         Set up sign-up button click listener
-//        binding.singUp.setOnClickListener {
-//            if (validateFields()) {
-//                val imageFile = createFileFromUri(selectedImageUri!!)
-//                val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), imageFile)
-//                val filePart = MultipartBody.Part.createFormData("file", imageFile.name, requestFile)
-//                val request = RegisterRequest(
-//                    name = binding.name.text.toString().trim(),
-//                    email = binding.email.text.toString().trim(),
-//                    phone = binding.phone.text.toString().trim(),
-//                    password = binding.password.text.toString().trim(),
-//                    country_id = "9",
-//                    type = "employee",
-//                    file = filePart
-//                )
-//
-//                // Trigger registration
-//                registerViewModel.registerUser(request)
-//                showToast("Registration triggered!")
-//                observeRegisterState()
-//
-//            }
+        binding.singUp.setOnClickListener {
+            if (validateFields()) {
+                val imageFile = createFileFromUri(selectedImageUri!!)
+                val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), imageFile)
+                val filePart = MultipartBody.Part.createFormData("file", imageFile.name, requestFile)
+                val request = RegisterRequest(
+                    name = binding.name.text.toString().trim(),
+                    email = binding.email.text.toString().trim(),
+                    phone = binding.phone.text.toString().trim(),
+                    password = binding.password.text.toString().trim(),
+                    country_id = "9",
+                    type = "employee",
+                    file = filePart
+                )
+
+                // Trigger registration
+                registerViewModel.registerUser(request)
+                showToast("Registration triggered!")
+                observeRegisterState()
+                registerViewModel.refreshToken()
+
+
+            }
             binding.textButton2.setOnClickListener{
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
             }
-//        }
+        }
     }
+private  fun observeCountries() {
+    lifecycleScope.launchWhenStarted {
+        registerViewModel.countriesState.collect { state ->
+            when (state) {
+                is Resource.Loading -> {
+                }
+                is Resource.Success -> {
+                    val countries = state.data
+                    setupCountrySpinner(countries)
+                    showSnackbar("Countries fetched successfully")
+
+                }
+                is Resource.Error -> {
+                    showSnackbar(state.message)
+                }
+            }
+        }
+    }
+
+}
 
     private fun observeRegisterState() {
         lifecycleScope.launchWhenStarted {
@@ -132,7 +155,11 @@ class RegisterScreen : AppCompatActivity() {
         }
         return file
     }
-
+    private fun setupCountrySpinner(countries: List<String>) {
+        val adapter = ArrayAdapter(this, R.layout.simple_spinner_item, countries)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.countryDropdown.adapter = adapter
+    }
 
     // Function to validate form fields
     private fun validateFields(): Boolean {

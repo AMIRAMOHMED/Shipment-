@@ -21,11 +21,13 @@ class RegisterViewModel @Inject constructor(
 ) : ViewModel() {
     private val _registerState = MutableStateFlow<Resource<RegisterResponse>>(Resource.Loading)
     val registerState: StateFlow<Resource<RegisterResponse>> get() = _registerState
+    private val _countriesState = MutableStateFlow<Resource<List<String>>>(Resource.Loading)
+    val countriesState: StateFlow<Resource<List<String>>> = _countriesState
 
     fun refreshToken() {
         viewModelScope.launch {
             try {
-                val newToken = authRepo.refreshToken("200")
+                val newToken = authRepo.refreshToken()
                 Log.d("refresh", "New access token: $newToken")
             } catch (e: Exception) {
                 Log.e("refresh", "Failed to refresh token: ${e.message}")
@@ -54,6 +56,19 @@ class RegisterViewModel @Inject constructor(
             }
         }
     }
+
+    fun fetchCountries() {
+        viewModelScope.launch {
+            try {
+                val response = authRepo.getCountries()
+                val countriesList = response.countries.map { it.name }
+                _countriesState.value = Resource.Success(countriesList)
+            } catch (e: Exception) {
+                _countriesState.value = Resource.Error("Failed to fetch countries")
+            }
+        }
+    }
+
 
 
 }

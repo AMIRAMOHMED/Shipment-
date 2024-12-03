@@ -1,6 +1,4 @@
 package com.example.hyperdesigntask.home.viewmodel
-
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hyperdesigntask.data.model.ShippmentsResponse
@@ -15,7 +13,6 @@ import javax.inject.Inject
 class HomeViewModel  @Inject constructor(
     private val shipmentRepository: ShipmentRepo
 ) : ViewModel() {
-
 
     private val _shippments = MutableStateFlow<Resource<ShippmentsResponse>>(Resource.Loading)
     val shippments  = _shippments.asStateFlow()

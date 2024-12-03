@@ -56,40 +56,13 @@ class AppModule {
             .addInterceptor { chain ->
                 val originalRequest = chain.request()
                 val requestBuilder = originalRequest.newBuilder()
-
-                // Log request URL
-                Log.i("refresh", "Request URL: ${originalRequest.url}")
-
-                // Log HTTP Method
-                Log.i("refresh", "HTTP Method: ${originalRequest.method}")
-
-                // Get token from TokenManager
                 val token = tokenManager.getAccessToken()
-
-
-                // Conditionally add Authorization Header
-                if (!originalRequest.url.toString().contains("refresh")) {
                     if (!token.isNullOrEmpty()) {
                         requestBuilder.addHeader("Authorization", "Bearer $token")
                         Log.i("refresh", "Authorization Header Added")
-                    } else {
-                        Log.w("refresh", "No Authorization Token Found")
-                    }
-                } else {
-                    Log.i("refresh", "No Authorization Header Needed for Refresh Endpoint")
                 }
-
-                // Log Headers
-                Log.i("refresh", "Request Headers: ${originalRequest.headers}")
-
-                // Build modified request
                 val modifiedRequest = requestBuilder.build()
                 val response = chain.proceed(modifiedRequest)
-
-                // Log Response
-                Log.i("refresh", "Response Code: ${response.code}")
-                Log.i("refresh", "Response Message: ${response.message}")
-
                 response
             }
             .build()
