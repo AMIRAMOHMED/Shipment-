@@ -1,0 +1,54 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="shipment"
+            type="com.example.hyperdesigntask.data.model.Shipment" />
+    </data>
+    <androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardBackgroundColor="@color/surface"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/ShipmentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{shipment.shipment_name}"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/petrona"
+            android:textColor="@color/text_primary" />
+
+        <TextView
+            android:id="@+id/ShipmentDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{shipment.description}"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/text_secondary"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/shipmentStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{"Status: " + shipment.status}'
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/primary"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+</layout>

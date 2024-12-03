@@ -1,5 +1,4 @@
 package com.example.hyperdesigntask.home.viewmodel
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hyperdesigntask.data.model.ApiResponse
@@ -25,14 +24,11 @@ class RequestQuotationViewModel @Inject constructor(
                 val response = authRepo.sendRequestQuotation(request)
 
                 if (response.message == "success") {
-                    // Emit success state with the response
                     _requestQuotationState.value = Resource.Success(response)
                 } else {
-                    // Emit error state with a fallback message
                     _requestQuotationState.value = Resource.Error(response.message ?: "Unknown error occurred")
                 }
             } catch (e: Exception) {
-                // Emit error state in case of an exception
                 _requestQuotationState.value = Resource.Error(e.message ?: "An unknown error occurred")
             }
         }

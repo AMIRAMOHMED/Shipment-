@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
@@ -11,10 +12,31 @@
         <action
             android:id="@+id/action_homeFragment_to_requestQuotationFragment"
             app:destination="@id/requestQuotationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_shipmentItemDetailsFragment"
+            app:destination="@id/shipmentItemDetailsFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/requestQuotationFragment"
         android:name="com.example.hyperdesigntask.home.ui.RequestQuotationFragment"
-        android:label="RequestQuotationFragment" />
+        android:label="RequestQuotationFragment" >
+        <action
+            android:id="@+id/action_requestQuotationFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/shipmentItemDetailsFragment"
+        android:name="com.example.hyperdesigntask.home.ui.ShipmentItemDetailsFragment"
+        android:label="fragment_shipment_item_details"
+        tools:layout="@layout/fragment_shipment_item_details" >
+        <argument
+            android:name="id"
+            app:argType="string"
+         />
+        <action
+            android:id="@+id/action_shipmentItemDetailsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id ("androidx.navigation.safeargs")
 }
 
 android {
@@ -45,6 +46,7 @@ android {
  }
 
 dependencies {
+
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.3")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.3")
     implementation ("androidx.work:work-runtime-ktx:2.8.0")

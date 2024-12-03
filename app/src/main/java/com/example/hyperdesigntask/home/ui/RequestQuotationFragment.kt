@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.hyperdesigntask.R
 import com.example.hyperdesigntask.data.model.Container
 import com.example.hyperdesigntask.data.model.RequestQuotation
@@ -50,6 +51,7 @@ class RequestQuotationFragment : Fragment() {
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
                         showSnackbar("Quotation requested successfully")
+                        findNavController().navigate(R.id.action_requestQuotationFragment_to_homeFragment)
                     }
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE

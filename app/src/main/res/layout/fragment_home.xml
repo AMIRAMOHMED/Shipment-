@@ -8,7 +8,7 @@
     tools:context=".home.ui.HomeFragment">
 
 <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/shipment_list"
+    android:id="@+id/shipmentList"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp" />
@@ -19,5 +19,14 @@
     android:layout_gravity="bottom|end"
     android:layout_margin="16dp"
     app:backgroundTint="@color/primary"
-    app:srcCompat="@drawable/profile" />
+    app:srcCompat="@drawable/added" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:indeterminateTint="@color/primary_dark" />
+
+
 </FrameLayout>

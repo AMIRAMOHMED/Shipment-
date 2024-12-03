@@ -31,4 +31,7 @@
     <string name="quantity">Quantity</string>
     <string name="comment">Comment</string>
     <string name="write_your_comment">write your comment</string>
+    <string name="status_pending">Status: Pending</string>
+    <string name="shipment_description">Shipment Description</string>
+    <string name="shipment_name">Shipment Name</string>
 </resources>
